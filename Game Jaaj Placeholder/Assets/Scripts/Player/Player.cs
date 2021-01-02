@@ -4,22 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    /**
-     *  - Things to Change or add -
-     *  Prone
-     *  toggle Crouch
-0     *  
-     *  -------------------------------------------------------------------
-     *  ==== Code By Dani, Dave, Me and Forum guys (: ====
-     *  
-     *  Copyright 2020/12/29 - Gabriel Spinola
-     *  
-     *  | free to use |
-     *  -------------------------------------------------------------------
-     * **/
-
-    // Ready to jump removed may cause bugs in future.
-
     #region Variables
 
     private Rigidbody rb;
