@@ -282,8 +282,7 @@ public class Player : MonoBehaviour
         rb.useGravity = false;
         isWallRunning = true;
 
-        if (rb.velocity.magnitude <= maxWallrunSpeed && rb.velocity.magnitude >= 1f)
-        {
+        if (rb.velocity.magnitude <= maxWallrunSpeed && rb.velocity.magnitude >= 1f) {
             // Add forward Force
             rb.AddForce(playerLook.orientation.forward * wallrunForce * Time.deltaTime);
 
@@ -292,13 +291,9 @@ public class Player : MonoBehaviour
 
             //Make sure character sticks to wall
             if (isWallRight)
-            {
                 rb.AddForce(playerLook.orientation.right * wallrunForce / 5 * Time.deltaTime);
-            }
             else
-            {
                 rb.AddForce(-playerLook.orientation.right * wallrunForce / 5 * Time.deltaTime);
-            }
         }
 
         Invoke(nameof(StopWallRun), maxWallrunTime);
@@ -348,9 +343,7 @@ public class Player : MonoBehaviour
         float angle = Vector3.Angle(Vector3.up, v);
 
         if (angle <= maxSlopeAngle && angle >= 0)
-        {
             rb.AddForce(Vector3.down * 60f);
-        }
     }
 
     public bool IsFloor(Vector3 v)
@@ -372,13 +365,11 @@ public class Player : MonoBehaviour
             return;
 
         //Iterate through every collision in a physics update
-        for (int i = 0; i < col.contactCount; i++)
-        {
+        for (int i = 0; i < col.contactCount; i++) {
             Vector3 normal = col.contacts[i].normal;
 
             //FLOOR
-            if (IsFloor(normal))
-            {
+            if (IsFloor(normal)) {
                 grounded = true;
                 normalVector = normal;
                 cancellingGrounded = false;
@@ -390,8 +381,7 @@ public class Player : MonoBehaviour
         //Invoke ground/wall cancel, since we can't check normals with CollisionExit
         float delay = 3f;
 
-        if (!cancellingGrounded)
-        {
+        if (!cancellingGrounded) {
             cancellingGrounded = true;
 
             Invoke(nameof(StopGrounded), Time.deltaTime * delay);
