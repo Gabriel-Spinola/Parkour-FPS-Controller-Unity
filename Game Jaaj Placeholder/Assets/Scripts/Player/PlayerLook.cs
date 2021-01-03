@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     Player player;
+    GlobalInputs inputs;
 
     [Header("References")]
     public Transform playerCam;

@@ -2,8 +2,19 @@
 
 public class GlobalInputs : MonoBehaviour
 {
-    public float xAxis, zAxis;
-    public bool jumpKey, crouchKey, keyRight, keyLeft, keyUp, keyDown;
+    [Header("Movement")]
+    public float xAxis;
+    public float zAxis;
+
+    public bool jumpKey;
+    public bool crouchKey;
+
+    [Header("Counter Movement")]
+    public bool keyRight;
+    public bool keyLeft;
+    public bool keyUp;
+    public bool keyDown;
+
 
     void Update()
     {
