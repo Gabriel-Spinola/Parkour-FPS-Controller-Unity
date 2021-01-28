@@ -20,7 +20,6 @@ public class PlayerLook : MonoBehaviour
     private float xRotation;
     private float desiredX;
 
-
     [Header("Leaning")]
     public float maxLeaningAngle;
 
@@ -54,12 +53,10 @@ public class PlayerLook : MonoBehaviour
         // Perform the Rotation
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX,0);
 
-        if (player.isWallRunning)
-        { 
+        if (player.isWallRunning) {
             playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, wallRunCameraTilt);
-        } 
-        else
-        {
+        }
+        else {
             if (Input.GetKey(KeyCode.Q)) {
                 isLeaningLeft = true;
 
