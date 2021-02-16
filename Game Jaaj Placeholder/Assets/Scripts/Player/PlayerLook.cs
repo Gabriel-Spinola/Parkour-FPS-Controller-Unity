@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
@@ -53,35 +54,72 @@ public class PlayerLook : MonoBehaviour
         // Perform the Rotation
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX,0);
 
+        float moveTowardsLeft = Mathf.MoveTowardsAngle(currAngle, 30f, 30f * Time.deltaTime);
+        float moveTowardsRight = Mathf.MoveTowardsAngle(currAngle, -30f, 30f * Time.deltaTime);
+
         if (player.isWallRunning) {
             playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, wallRunCameraTilt);
         }
         else {
-            if (Input.GetKey(KeyCode.Q)) {
+            if (Input.GetKeyDown(KeyCode.Q)) {
                 isLeaningLeft = true;
 
-                playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, Mathf.MoveTowardsAngle(currAngle, 30f, 30f * Time.deltaTime));
+                //StartCoroutine(CameraRotatesLeft());
             }
-            else if (Input.GetKey(KeyCode.E)) {
+            else if (Input.GetKeyDown(KeyCode.E)) {
                 isLeaningRight = true;
-
-                playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, Mathf.MoveTowardsAngle(currAngle, -30f, 30f * Time.deltaTime));
-            }
-            else {
                 isLeaningLeft = false;
-                isLeaningRight = false;
 
-                playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, Mathf.MoveTowardsAngle(currAngle, 0f, 40f * Time.deltaTime));
+                playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, moveTowardsRight);
             }
 
+            //else {
+            //isLeaningLeft = false;
+            //isLeaningRight = false;
+
+            // playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, Mathf.MoveTowardsAngle(currAngle, 0f, 40f * Time.deltaTime));
+            //}
+
+            /*
             if (currAngle <= 30)
                 Debug.Log("Left");
 
             if (currAngle <= 330 && currAngle > 30)
+            if (currAngle <= 330 && currAngle > 30)
                 Debug.Log("Right");
+            */
+
+            while (isLeaningLeft)
+            {
+                // playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, Mathf.MoveTowardsAngle(currAngle, 30f, 30f * Time.deltaTime));
+            }
+
+            print(isLeaningLeft);
         }
 
         WallRunTiltManager();
+    }
+
+    void Leaning()
+    {
+
+    }
+
+    IEnumerator CameraRotatesLeft()
+    {
+        while (isLeaningLeft)
+        {
+            playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, Mathf.MoveTowardsAngle(currAngle, 30f, 30f * Time.deltaTime));
+
+            yield return new WaitForSeconds(30f * Time.deltaTime);
+
+            break;
+        }
+    }
+
+    void CameraRotatesRight()
+    {
+        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, Mathf.MoveTowardsAngle(currAngle, -30f, 30f * Time.deltaTime));
     }
 
     void WallRunTiltManager()
